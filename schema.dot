@@ -1,0 +1,26 @@
+digraph DatabaseSchema {
+    node[shape=record, fontname="Calibri"];
+    edge[fontname="Calibri"];
+    Product [label="{PRODUCT|product-id*|name|category|start-offer|end-offer}"];
+    CurrentAccount [label="{CURRENT-ACCOUNT|product-id*|interest|monthly-fee|min-deposit}"];
+    SavingsAccount [label="{SAVINGS-ACCOUNT|product-id*|interest|min-monthly-deposit|max-monthly-deposit|max-withdrawal}"];
+    CreditCard [label="{CREDIT-CARD|product-id*|min-balance|interest}"];
+    Overdraft [label="{OVERDRAFT|product-id*|interest|min-balance|daily-limit|daily-fee}"]
+    Customer [label="{CUSTOMER|customer-id*|first-name|last-name|date-of-birth|address|postcode|income}"];
+    Account [label="{ACCOUNT|account-id*|customer-id|product-id}"];
+    Transaction [label="{TRANSACTION|event-id*|account-id|merchant-id|amount|category|reference}"];
+    Merchant [label="{MERCHANT|merchant-id*|name|category}"]
+    Event [label="{EVENT|event-id*|customer-id|category|timestamp}"]
+
+    Product -> SavingsAccount [label="can-be"];
+    Product -> CurrentAccount [label="can-be"];
+    Product -> CreditCard [label="can-be"];
+    Product -> Overdraft [label="can-be"];
+    Product -> Account [label="has-many"];
+
+    Customer -> Account [label="has-many"];
+    Customer -> Event [label="has-many"];
+    Account -> Transaction [label="has-many"];
+    Merchant -> Transaction [label="has-many"];
+    Event -> Transaction [label="can-be"];
+}
