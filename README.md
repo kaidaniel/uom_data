@@ -30,4 +30,6 @@ For example:
 - No account can belong to more than one customer.
 - But an account can have several transactions.
 
+# Graph
+
 ![schema](schema.dot.png)
