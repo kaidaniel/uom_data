@@ -27,7 +27,7 @@ Each point in T1 must map to a set of points in T2 (identified by T1's unique fi
 
 For example: 
 
-    - No account can belong to more than one customer.
-    - But an account can have several transactions.
+- No account can belong to more than one customer.
+- But an account can have several transactions.
 
 ![schema](schema.dot.png)
