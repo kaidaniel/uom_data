@@ -1,26 +1,84 @@
 digraph DatabaseSchema {
-    node[shape=record, fontname="Calibri"];
+    node[shape=Mrecord, fontname="Calibri"];
     edge[fontname="Calibri"];
-    Product [label="{PRODUCT|product-id*|name|category|start-offer|end-offer}"];
-    CurrentAccount [label="{CURRENT-ACCOUNT|product-id*|interest|monthly-fee|min-deposit}"];
-    SavingsAccount [label="{SAVINGS-ACCOUNT|product-id*|interest|min-monthly-deposit|max-monthly-deposit|max-withdrawal}"];
-    CreditCard [label="{CREDIT-CARD|product-id*|min-balance|interest}"];
-    Overdraft [label="{OVERDRAFT|product-id*|interest|min-balance|daily-limit|daily-fee}"]
-    Customer [label="{CUSTOMER|customer-id*|first-name|last-name|date-of-birth|address|postcode|income}"];
-    Account [label="{ACCOUNT|account-id*|customer-id|product-id}"];
-    Transaction [label="{TRANSACTION|event-id*|account-id|merchant-id|amount|category|reference}"];
-    Merchant [label="{MERCHANT|merchant-id*|name|category}"]
-    Event [label="{EVENT|event-id*|customer-id|category|timestamp}"]
+    Product [label="{PRODUCT
+        |product-id* \l
+        |product-name \l
+        |product-type \l
+        |product-benefits \l}"];
+    PersonalCurrentAccount [label="{PERSONAL-CURRENT-ACCOUNT
+        |product-id*\l
+        |interest-rate\l
+        |monthly-fee\l
+        |min-monthly-deposit\l}"];
+    SavingsAccount [label="{SAVINGS-ACCOUNT
+        |product-id*\l
+        |interest-rate\l
+        |min-monthly-deposit\l
+        |max-monthly-deposit\l
+        |max-yearly-withdrawal\l
+        |max-withdrawal-limit\l}"];
+    CreditCard [label="{CREDIT-CARD
+        |product-id*\l
+        |interest-rate\l
+        |monthly-fee\l
+        |credit-limit\l}"];
+    Overdraft [label="{OVERDRAFT
+        |product-id*\l
+        |daily-interest-rate\l
+        |interest-free-overdraft-limit\l
+        |interest-free-buffer\l}"]
+    Customer [label="{CUSTOMER
+        |customer-id*\l
+        |title\l
+        |name\l
+        |surname\l
+        |nationality\l
+        |dob\l
+        |address\l
+        |city\l
+        |postcode\l
+        |monthly-income\l
+        |marital-status\l}"];
+    Account [label="{ACCOUNT
+        |account-id*\l
+        |product-id\l
+        |customer-id\l}"];
+    Transaction [label="{TRANSACTION
+        |transaction-id*\l
+        |account-id\l
+        |transaction-date\l
+        |transaction-time\l
+        |transaction-amount\l
+        |payment-type\l
+        |transaction-category\l
+        |transaction-reference\l}"];
+    Interaction [label="{INTERACTION
+        |visit-id\l
+        |customer-id\l
+        |access-method\l
+        |visit-type\l
+        |visit-date\l
+        |area-id\l
+        |area-type\l
+        |area-description\l
+        |area-view-open-time\l
+        |area-view-close-time\l}"]
 
+/*
     Product -> SavingsAccount [label="can-be"];
-    Product -> CurrentAccount [label="can-be"];
+    Product -> PersonalCurrentAccount [label="can-be"];
     Product -> CreditCard [label="can-be"];
     Product -> Overdraft [label="can-be"];
-    Product -> Account [label="has-many"];
+*/
 
+    SavingsAccount         -> Product [label="is-a"];
+    PersonalCurrentAccount -> Product [label="is-a"];
+    CreditCard             -> Product [label="is-a"];
+    Overdraft              -> Product [label="is-a"];
+
+    Product  -> Account [label="has-many"];
     Customer -> Account [label="has-many"];
-    Customer -> Event [label="has-many"];
-    Account -> Transaction [label="has-many"];
-    Merchant -> Transaction [label="has-many"];
-    Event -> Transaction [label="can-be"];
+    Customer -> Interaction [label="has-many"];
+    Account  -> Transaction [label="has-many"];
 }

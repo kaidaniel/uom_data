@@ -1,57 +1,33 @@
+# Tables
+
+- In the graph below, each element represents a table (like PRODUCT or ACCOUNT).  
+- Each table is a set of points (the points are not shown in the graph).  
+- Each point contains several fields (whose names are listed under the table's name).  
+- Each field of a point contains some value (not shown in the graph).  
+- A field is "unique" (with respect to a certain table) if it is listed with an asterisk "\*".  
+- No two values of a unique field can be the same.  
+
+# Constraints
+
+Arrows in the graph represent constraints between tables. If there is no arrow between two tables, then they don't share any fields with the same name.
+
+## T1 is-a T2
+
+Each point in T1 must map to a unique point in T2 (identified by T1's unique field).
+
+For example:
+
+- a credit card is a product. 
+- an overdraft is a product.
+
+
+## T1 has-many T2
+
+Each point in T1 must map to a set of points in T2 (identified by T1's unique field). T2 is the union of the range of that map.
+
+For example: 
+
+    - No account can belong to more than one customer.
+    - But an account can have several transactions.
+
 ![schema](schema.dot.png)
-
-# PRODUCT
-Example:
-
-|product-id|name|category|start-offer|end-offer|
-|----------|----|--------|-----------|---------|
-|3|"Club Lloyds"|"SAVINGS-ACCOUNT"|2012-06-01|2013-12-31|
-|4|"Club Lloyds"|"SAVINGS-ACCOUNT"|2014-01-01|2014-06-01|
-|...|...|...|...|
-
-- **product-id**: A number unique for each row.
-- **name**: The name of the product.
-- **category**: CURRENT-ACCOUNT or SAVINGS-ACCOUNT or CREDIT-CARD or OVERDRAFT.
-- **start-offer**: When the product started being offered in yyyy-mm-dd format.
-- **end-offer**: Null or when the product stopped being offered in yyyy-mm-dd format.
-
-# CURRENT-ACCOUNT
-Example:
-
-|product-id|interest|monthly-fee|min-deposit|
-|----------|--------|-----------|-----------|
-|2|0.02|1|100|
-|...|...|...|...|
-
-- **product-id**: From PRODUCT. Unique for each row.
-- **interest**: Fraction of balance accumulating per year.
-- **monthly-fee**: Amount deducted from the account automatically each month.
-- **min-deposit**: Smallest amount that can be deposited in a single transaction.
-
-# SAVINGS-ACCOUNT
-Example:
-
-|product-id|interest|min-monthly-deposit|max-monthly-deposit|max-withdrawal|
-|----------|--------|-------------------|-------------------|--------------|
-|1|0.03|1000|100000|30000|
-|...|...|...|...|...|
-
-- **product-id**: From PRODUCT. Unique for each row.
-- **interest**: Fraction of balance accumulating per year.
-- **min-monthly-deposit**: Smallest sum of amounts that need to be deposited per month.
-- **max-monthly-deposit**: Largest sum of amounts that can be deposited per month.
-- **max-withdrawal**: Largest amount that can be withdrawn in a single transaction.
-
-# CREDIT-CARD
-
-# OVERDRAFT
-
-# CUSTOMER
-
-# ACCOUNT
-
-# MERCHANT
-
-# EVENT
-
-# TRANSACTION
