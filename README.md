@@ -17,8 +17,8 @@ Each point in T1 must map to a unique point in T2 (identified by T1's unique fie
 
 For example:
 
-- a credit card is a product. 
-- an overdraft is a product.
+- A credit card is a product. 
+- An overdraft is a product.
 
 
 ## T1 has-many T2
@@ -27,7 +27,6 @@ Each point in T1 must map to a set of points in T2 (identified by T1's unique fi
 
 For example: 
 
-- A customer can have several accounts.
 - There can be several accounts of the same product.
 - An account can have several transactions.
 
